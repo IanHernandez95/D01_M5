@@ -25,7 +25,7 @@ jobs:
           aws-region: $AWS_REGION
 
       - name: lanzar instancia EC2
-        uses: |
+        run: |
           aws ec2 run-instances \
             --image-id ami-0b5c0c0f26c572368 \ 
             --count 1 \
