@@ -1,0 +1,35 @@
+name: Crear una Instancia EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+
+      - name: Aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with: 
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $AWS_SECRET_ACCESS_KEY
+          aws-region: $AWS_REGION
+
+      - name: lanzar instancia EC2
+        uses: |
+          aws ec2 run-instances \
+            --image-id ami-0b5c0c0f26c572368 \ 
+            --count 1 \
+            --instance-type t2.micro \
+            --key-name ihf-EC2-LN \ 
+            --security-group-ids sg-06d84ba602546e697 \ 
+            --subnet-id subnet-0f347f31b78298a59
