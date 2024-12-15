@@ -22,7 +22,7 @@ jobs:
       - name: lanzar instancia EC2
         run: |
           aws ec2 run-instances \
-            --image-id ami-0b5c0c0f26c572368 \
+            --image-id ami-0cd0d9843545b1c77 \
             --count 1 \
             --instance-type t2.micro \
             --key-name ihf-EC2-LN \
