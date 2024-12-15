@@ -22,10 +22,10 @@ jobs:
       - name: lanzar instancia EC2
         run: |
           aws ec2 run-instances \
-            --image-id ami-0cd0d9843545b1c77 \
+            --image-id ${{ vars.AWS_AMI_ID }} \
             --count 1 \
-            --instance-type t2.micro \
-            --key-name ihf-EC2-LN \
-            --security-group-ids sg-06d84ba602546e697 \
-            --subnet-id subnet-0f347f31b78298a59 \
+            --instance-type ${{ vars.AWS_TIPO_INSTANCIA }} \
+            --key-name ${{ secrets.AWS_KEY_NAME }} \
+            --security-group-ids ${{ secrets.AWS_SECURITY_GROUP_ID }} \
+            --subnet-id ${{ secrets.AWS_SUBNET_ID }} \
             --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MiEC2byGithubActions}]'
